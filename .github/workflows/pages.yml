@@ -28,6 +28,18 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
+      - name: Validate dist contents (size, symlinks)
+        run: |
+          echo "dist size:" && du -sh dist || true
+          echo "checking for symlinks (will fail if any found)..."
+          if [ "$(find dist -type l -print -quit)" ]; then
+            echo "ERROR: symlinks found in dist:" && find dist -type l -ls
+            exit 1
+          else
+            echo "no symlinks found"
+          fi
+          echo "list large files (>100MB) if any:" && find dist -type f -size +100M -ls || true
+
       - name: Add CNAME for custom domain
         run: |
           if [ -d "dist" ]; then
@@ -39,9 +51,11 @@ jobs:
           fi
 
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-artifact@v4
+        # Use the pages-specific uploader so the artifact is compatible with
+        # actions/deploy-pages. This avoids symlink/hardlink issues that can
+        # occur when using the generic upload-artifact action.
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
           path: ./dist
 
       - name: Deploy to GitHub Pages
