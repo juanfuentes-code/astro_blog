@@ -35,7 +35,8 @@
     "youtube": "node scripts/youtube.cjs",
     "newpost": "astro-md-generator",
     "format": "prettier -w .",
-    "lint:eslint": "eslint . --ext .js,.ts,.astro"
+  "lint:eslint": "eslint . --ext .js,.ts,.astro",
+  "test": "echo \"No tests specified\" && exit 0"
   },
   "devDependencies": {
     "@astrojs/mdx": "2.0.2",
