@@ -1,4 +1,4 @@
-name: Build and deploy to GitHub Pages
+name: Build and deploy to gh-pages
 
 permissions:
   contents: write
@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
-      - name: Ensure dist exists and add CNAME
+      - name: Add CNAME for custom domain
         run: |
           if [ -d "dist" ]; then
             echo "juanfuentes.dev" > dist/CNAME
@@ -38,8 +38,9 @@ jobs:
           fi
 
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
+          name: pages
           path: ./dist
 
       - name: Deploy to GitHub Pages
