@@ -1,15 +1,19 @@
 ---
-import { getCollection } from "astro:content";
-import HomePagination from "@components/HomePagination.astro";
-import Base from "@layouts/Base.astro";
-import Posts from "@layouts/Posts.astro";
+// This page intentionally redirects to the static landing page in /web.
+// The actual blog listing is available at /blog.
+import type { APIRoute } from 'astro';
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+export const get: APIRoute = async ({ redirect }) => {
+  return redirect('/web/index.html', 302);
+};
+
 ---
 
-<Base>
-  <Posts posts={posts} />
-  <HomePagination />
-</Base>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/web/index.html" />
+  </head>
+  <body>
+    <p>If you are not redirected automatically, follow this <a href="/web/index.html">link to the static site</a>.</p>
+  </body>
+</html>

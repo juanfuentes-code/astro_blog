@@ -2,7 +2,7 @@
 title: "Ecosistema de datos - ¿Qué es la ciencia de datos?"
 description: '¿Que es la ciencia de datos?'
 pubDate: "2024-03-03T21:10:02.795Z"
-heroImage: 'https://utec.edu.pe/sites/default/files/styles/blog_full/public/blog/800x400_3_0.jpg'
+heroImage: '/blog-placeholder.jpg'
 categories: ['Data Science']
 authors: ['Juan Fuentes']
 tags: ['Data']
